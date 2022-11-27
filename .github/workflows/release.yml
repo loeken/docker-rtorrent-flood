@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: loeken/rtorrent-flood:testing
+          tags: loeken/rtorrent-flood:1.26.0-alpine
           context: .
           no-cache: true
       - name: Run Snyk to check Docker image for vulnerabilities
@@ -39,11 +39,11 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: loeken/rtorrent-flood:testing
+          image: loeken/rtorrent-flood:1.26.0-alpine
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: loeken/rtorrent-flood:testing
+          image-ref: loeken/rtorrent-flood:1.26.0-alpine
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
