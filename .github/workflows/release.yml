@@ -13,6 +13,9 @@ jobs:
       - name: patch dockerfile
         run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken\/rtorrent:latest/g' Dockerfile
 
+      - name: patch dockerfile
+        run: sed -i 's/RUN npm run build/RUN npm run build\nRUN npm install minimatch@3.0.5/g' Dockerfile
+
       - name: ls
         run: cat Dockerfile
       - name: Set up QEMU
