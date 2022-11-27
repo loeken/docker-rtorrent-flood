@@ -10,7 +10,6 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: jesec/flood
-          ref: refs/tags/v0.9.8-r15
       - name: patch dockerfile
         run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken/rtorrent:latest/g' Dockerfile
 
