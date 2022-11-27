@@ -15,7 +15,7 @@ jobs:
         run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken/rtorrent:latest/g' Dockerfile
 
       - name: patch package.json
-        run: sed -i 's/"loader-utils": "^2.0.0"/"loader-utils": "^2.0.3"/g' Dockerfile
+        run: sed -i 's/\"loader-utils\": \"^2.0.0\"/\"loader-utils\": \"^2.0.3\"/g' Dockerfile
         
       - name: ls
         run: cat Dockerfile
