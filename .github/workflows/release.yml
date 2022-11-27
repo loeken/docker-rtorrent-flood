@@ -14,9 +14,6 @@ jobs:
       - name: patch dockerfile
         run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken/rtorrent:latest/g' Dockerfile
 
-      - name: patch package.json
-        run: sed -i 's/\"loader-utils\"\: \"\^2.0.0\"/\"loader-utils\"\: \"\^2.0.3\"/g' package.json
-        
       - name: ls
         run: cat Dockerfile
       - name: Set up QEMU
@@ -34,4 +31,4 @@ jobs:
           push: true
           tags: loeken/rtorrent:testing
           context: .
-          no-cache: true%   
+          no-cache: true
