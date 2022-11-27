@@ -11,7 +11,7 @@ jobs:
         with:
           repository: jesec/flood
       - name: patch dockerfile
-        run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken/rtorrent:latest/g' Dockerfile
+        run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken\/rtorrent:latest/g' Dockerfile
 
       - name: ls
         run: cat Dockerfile
