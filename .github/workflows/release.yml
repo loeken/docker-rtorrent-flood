@@ -17,7 +17,7 @@ jobs:
           repository: loeken/docker-rtorrent-flood
           path: drf
       - name: patch dockerfile/package.json
-        run: cp drf/Dockerfile flood/Dockerfile && cp drf/package.json flood/package.json
+        run: cp drf/Dockerfile flood/Dockerfile
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
