@@ -17,11 +17,10 @@ jobs:
         with:
           repository: loeken/docker-rtorrent-flood
           path: me
+
       - name: patch dockerfile
         run: cp me/Dockerfile flood/Dockerfile
 
-      - name: ls
-        run: cat Dockerfile
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -36,7 +35,7 @@ jobs:
         with:
           push: true
           tags: loeken/rtorrent-flood:4.7.0,loeken/rtorrent-flood:latest
-          context: .
+          context: ./flood
           no-cache: true
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master
