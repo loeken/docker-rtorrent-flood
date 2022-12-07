@@ -13,7 +13,11 @@
 ARG BUILDPLATFORM=amd64
 ARG NODE_IMAGE=docker.io/node:alpine
 
+
 FROM --platform=$BUILDPLATFORM ${NODE_IMAGE} as nodebuild
+
+ENV PUID=568
+ENV PGID=568
 
 WORKDIR /usr/src/app/
 
@@ -43,11 +47,12 @@ COPY --from=nodebuild /usr/src/app ./
 RUN apk --no-cache add \
     mediainfo
 
-# Create "download" user
-RUN adduser -h /home/download -s /sbin/nologin --disabled-password download
+# Create "abc" user
+RUN addgroup -S abc -g 568 && adduser -S -G abc -u 568 abc
 
-# Run as "download" user
-USER download
+
+# Run as "abc" user
+USER abc
 
 # Expose port 3000 and 4200
 EXPOSE 3000
