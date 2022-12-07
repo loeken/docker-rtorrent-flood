@@ -10,12 +10,15 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: jesec/flood
+          path: flood
 
+      - name: Check out my other private repo
+        uses: actions/checkout@master
+        with:
+          repository: loeken/docker-rtorrent-flood
+          path: me
       - name: patch dockerfile
-        run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken\/rtorrent:latest/g' Dockerfile
-
-      - name: patch dockerfile
-        run: sed -i 's/RUN npm ci --legacy-peer-deps/RUN npm i\nRUN npm audit fix\n/g' Dockerfile
+        run: cp me/Dockerfile flood/Dockerfile
 
       - name: ls
         run: cat Dockerfile

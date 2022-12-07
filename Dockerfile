@@ -21,10 +21,12 @@ WORKDIR /usr/src/app/
 COPY . ./
 
 # Fetch dependencies from npm
-RUN npm ci --legacy-peer-deps
-
-# npm audit fix
+RUN npm ci
 RUN npm audit fix
+RUN npm install qs@6.9.7
+RUN npm install minimatch@3.0.5
+RUN npm run build
+
 
 # Build assets
 RUN npm run build
