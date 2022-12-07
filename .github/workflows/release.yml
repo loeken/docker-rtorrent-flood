@@ -6,18 +6,19 @@ jobs:
   release:
     runs-on: ubuntu-22.04
     steps:
-      - name: Check out my other private repo
+      - name: Check out flood
         uses: actions/checkout@master
         with:
           repository: jesec/flood
-      - name: patch dockerfile
-        run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken\/rtorrent:latest/g' Dockerfile
+          path: flood
+      - name: Check out this repo
+        uses: actions/checkout@master
+        with:
+          repository: loeken/docker-rtorrent-flood
+          path: drf
+      - name: patch dockerfile/package.json
+        run: cp drf/Dockerfile flood/Dockerfile && cp drf/package.json flood/package.json
 
-      - name: patch dockerfile
-        run: sed -i 's/RUN npm run build/RUN npm run build\nRUN npm install minimatch@3.0.5\nRUN npm audit fix/g' Dockerfile
-
-      - name: ls
-        run: cat Dockerfile
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -32,7 +33,7 @@ jobs:
         with:
           push: true
           tags: loeken/rtorrent-flood:4.7.0,loeken/rtorrent-flood:latest
-          context: .
+          context: ./flood
           no-cache: true
       - name: Run Snyk to check Docker image for vulnerabilities
         uses: snyk/actions/docker@master
@@ -48,3 +49,4 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
