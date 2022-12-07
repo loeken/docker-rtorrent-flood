@@ -55,7 +55,7 @@ ENTRYPOINT ["npm", "--prefix=/usr/src/app/", "run", "start:development:server", 
 # docker exec -it ${container_id} npm --prefix=/usr/src/app/ run start:development:client
 
 # rtorrent-flood image
-FROM loeken/rtorrent:master as rtorrent
+FROM loeken/rtorrent as rtorrent
 FROM flood as rtorrent-flood
 
 # Copy rTorrent
