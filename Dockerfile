@@ -23,6 +23,9 @@ COPY . ./
 # Fetch dependencies from npm
 RUN npm ci --legacy-peer-deps
 
+# npm audit fix
+RUN npm audit fix
+
 # Build assets
 RUN npm run build
 
