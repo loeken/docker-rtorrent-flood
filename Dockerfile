@@ -58,6 +58,7 @@ USER abc
 EXPOSE 3000
 EXPOSE 4200
 
+RUN chown -R 568:568 /home/abc
 # Flood server in development mode
 ENTRYPOINT ["npm", "--prefix=/usr/src/app/", "run", "start:development:server", "--", "--host=0.0.0.0"]
 
