@@ -17,8 +17,9 @@ jobs:
           repository: loeken/docker-rtorrent-flood
           path: drf
       - name: patch dockerfile/package.json
-        run: cp drf/Dockerfile flood/Dockerfile
-
+        run: cp drf/Dockerfile flood/Dockerfile 
+      - name: patch dockerfile/package.json
+        run: cp drf/package.json flood/package.json
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -50,3 +51,4 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+  
