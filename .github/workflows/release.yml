@@ -15,7 +15,7 @@ jobs:
         run: sed -i 's/docker.io\/jesec\/rtorrent:master/loeken\/rtorrent:latest/g' Dockerfile
 
       - name: patch dockerfile
-        run: sed -i 's/RUN npm run build/RUN npm audit fix\nRUN npm install qs@6.9.7\nRUN npm install minimatch@3.0.5\nRUN npm run build\n/g' Dockerfile
+        run: sed -i 's/RUN npm ci --legacy-peer-deps/RUN npm i\nRUN npm audit fix\n/g' Dockerfile
 
       - name: ls
         run: cat Dockerfile
