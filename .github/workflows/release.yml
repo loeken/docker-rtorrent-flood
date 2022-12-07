@@ -24,7 +24,7 @@ jobs:
       - name: patch package.json
         run: cp me/package.json flood/package.json
       - name: patch package-lock.json
-        run: cp me/package-lock.json flood/package-lock.json
+        run: rm flood/package-lock.json
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
