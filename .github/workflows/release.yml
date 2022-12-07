@@ -48,7 +48,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: loeken/rtorrent-flood:4.7.0
+          image-ref: loeken/rtorrent-flood:latest
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
