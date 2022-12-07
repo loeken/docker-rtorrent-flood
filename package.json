@@ -227,6 +227,7 @@
     "geoip-country"
   ],
   "overrides": {
-    "qs": "6.9.7"
+    "qs": "6.9.7",
+    "minimatch": "3.0.5"
   }
 }
