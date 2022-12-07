@@ -21,6 +21,7 @@ WORKDIR /usr/src/app/
 COPY . ./
 
 # Fetch dependencies from npm
+RUN rm -rf package-lock.json
 RUN npm install
 RUN npm audit fix
 RUN npm install qs@6.9.7
