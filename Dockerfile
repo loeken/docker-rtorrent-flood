@@ -41,7 +41,7 @@ RUN apk --no-cache add \
     mediainfo
 
 # Create "abc" user
-RUN addgroup -S abc -g 568 && adduser -S -G abc -u 568 abc
+RUN addgroup -S abc -g 568 && adduser -S -G abc -u 568 abc -h /config
 
 # Run as "abc" user
 USER abc
