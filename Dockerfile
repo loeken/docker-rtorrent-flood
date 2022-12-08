@@ -13,11 +13,7 @@
 ARG BUILDPLATFORM=amd64
 ARG NODE_IMAGE=docker.io/node:alpine
 
-
 FROM --platform=$BUILDPLATFORM ${NODE_IMAGE} as nodebuild
-
-ENV PUID=568
-ENV PGID=568
 
 WORKDIR /usr/src/app/
 
@@ -25,12 +21,9 @@ WORKDIR /usr/src/app/
 COPY . ./
 
 # Fetch dependencies from npm
-RUN rm -rf package-lock.json
 RUN npm install
-RUN npm audit fix
-RUN npm install qs@6.9.7
-RUN npm run build
 
+RUN npm audit fix
 
 # Build assets
 RUN npm run build
@@ -50,7 +43,6 @@ RUN apk --no-cache add \
 # Create "abc" user
 RUN addgroup -S abc -g 568 && adduser -S -G abc -u 568 abc
 
-
 # Run as "abc" user
 USER abc
 
@@ -58,7 +50,6 @@ USER abc
 EXPOSE 3000
 EXPOSE 4200
 
-RUN chown -R 568:568 /home/abc
 # Flood server in development mode
 ENTRYPOINT ["npm", "--prefix=/usr/src/app/", "run", "start:development:server", "--", "--host=0.0.0.0"]
 
@@ -66,7 +57,7 @@ ENTRYPOINT ["npm", "--prefix=/usr/src/app/", "run", "start:development:server", 
 # docker exec -it ${container_id} npm --prefix=/usr/src/app/ run start:development:client
 
 # rtorrent-flood image
-FROM loeken/rtorrent:v0.9.8-r15 as rtorrent
+FROM docker.io/jesec/rtorrent:master as rtorrent
 FROM flood as rtorrent-flood
 
 # Copy rTorrent
