@@ -17,10 +17,8 @@ jobs:
         with:
           repository: loeken/docker-rtorrent-flood
           path: me
-
       - name: patch dockerfile
         run: cp me/Dockerfile flood/Dockerfile
-
       - name: patch package.json
         run: cp me/package.json flood/package.json
       - name: patch package-lock.json
