@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '0 10 * * *'
 env:
-  version: version-v21.1
+  version: 4.7.0
 jobs:
   release:
     runs-on: ubuntu-22.04
