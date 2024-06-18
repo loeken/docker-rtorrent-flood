@@ -4,16 +4,19 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 10 * * *'
-env:
-  version: 4.7.0
 jobs:
   release:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repo
         uses: actions/checkout@master
+      - name: Get version number
+        run: |
+          ls -la
+          VERSION=$(cat version.yaml | grep 'version' | cut -d ' ' -f4)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: replace version in Dockerfiel
-        run: sed -i 's/VERSION/${{ env.version }}/g' Dockerfile 
+        run: sed -i 's/VERSION/${{ env.VERSION }}/g' Dockerfile 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -23,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: loeken/rtorrent-flood:${{ env.version }}
+          tags: loeken/rtorrent-flood:${{ env.VERSION }}
           context: .
           no-cache: true
